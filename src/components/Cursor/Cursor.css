@@ -1,0 +1,38 @@
+.cursor-root {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 0, 95, 0.55);
+  box-shadow: 0 0 24px rgba(255, 0, 95, 0.25), inset 0 0 20px rgba(255, 0, 95, 0.08);
+  will-change: transform;
+}
+
+.cursor-dot {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 6px;
+  height: 6px;
+  margin: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--neon) 55%, #ff005f);
+  box-shadow: 0 0 14px rgba(255, 0, 95, 0.9);
+  will-change: transform;
+}
+
+@media (pointer: coarse) {
+  .cursor-root {
+    display: none;
+  }
+}

@@ -1,0 +1,102 @@
+.portfolio {
+  position: relative;
+  padding: 3.5rem 1rem 4rem;
+  background: var(--void);
+}
+
+.portfolio::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 70% 45% at 100% 30%, rgba(255, 0, 95, 0.06), transparent 50%);
+}
+
+.portfolio-inner {
+  position: relative;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.portfolio-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.portfolio-github {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: min(100%, 28rem);
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 0, 95, 0.22);
+  background: linear-gradient(155deg, rgba(255, 0, 95, 0.08), var(--surface-2));
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.3s ease, transform 0.4s var(--ease-out), box-shadow 0.35s ease;
+}
+
+.portfolio-github:hover {
+  border-color: rgba(255, 0, 95, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 24px 56px rgba(0, 0, 0, 0.55), 0 0 40px rgba(255, 0, 95, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.portfolio-github-icon {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-items: center;
+  font-size: 1.55rem;
+  background: rgba(255, 0, 95, 0.12);
+  border: 1px solid rgba(255, 0, 95, 0.32);
+  color: var(--neon-bright);
+}
+
+.portfolio-github-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  text-align: left;
+}
+
+.portfolio-github-label {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.portfolio-github-sub {
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+
+@media (min-width: 900px) {
+  .portfolio {
+    padding: 4.5rem 1.5rem 5rem;
+  }
+
+  .portfolio-main {
+    margin-top: 2.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-github,
+  .portfolio-github:hover {
+    transform: none;
+  }
+}

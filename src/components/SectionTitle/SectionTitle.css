@@ -1,0 +1,40 @@
+.section-title {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.section-title-eyebrow {
+  margin: 0 0 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--neon-bright);
+  text-shadow: 0 0 18px rgba(255, 0, 95, 0.35);
+}
+
+.section-title-heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 4.2vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  color: var(--text);
+  text-transform: uppercase;
+  text-shadow: 0 0 42px rgba(255, 0, 95, 0.12), 0 0 80px rgba(255, 0, 95, 0.06);
+}
+
+.section-title-sub {
+  margin: 0.7rem auto 0;
+  max-width: 38rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+@media (min-width: 900px) {
+  .section-title {
+    margin-bottom: 2.25rem;
+  }
+}

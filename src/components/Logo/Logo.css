@@ -1,0 +1,91 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: clamp(1.02rem, 3.2vw, 1.2rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  line-height: 1;
+}
+
+.logo-bracket {
+  color: var(--text-muted);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.logo-core {
+  --logo-caret-w: max(1px, 0.125em);
+  /* Reserve max text width + slack so letter-spacing never widens the bar */
+  --logo-track: calc(var(--logo-ch, 9) * 0.95ch);
+  display: inline-flex;
+  align-items: center;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  /* padding 0.06em each side (included in width via border-box) */
+  width: calc(0.12em + var(--logo-track) + 0.06em + var(--logo-caret-w));
+  padding-inline: 0.06em;
+}
+
+.logo-core-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.06em;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.logo-core-text {
+  display: inline-block;
+  line-height: 1;
+  background: linear-gradient(90deg, var(--neon-bright), #fff, var(--neon));
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: logo-shift 7s linear infinite;
+}
+
+.logo-caret {
+  flex: 0 0 var(--logo-caret-w);
+  width: var(--logo-caret-w);
+  height: 0.86em;
+  border-radius: 2px;
+  background: var(--neon-bright);
+  box-shadow: 0 0 10px rgba(255, 0, 95, 0.65);
+  animation: logo-caret-blink 0.92s step-end infinite;
+  transform: translateY(-0.035em);
+}
+
+@keyframes logo-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes logo-caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-core-text {
+    animation: none;
+  }
+
+  .logo-caret {
+    animation: none;
+    opacity: 0.85;
+  }
+}

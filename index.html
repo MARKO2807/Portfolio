@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Marko Bare — web developer from Croatia (HR). Modern React and WordPress interfaces, accessible UI, performance-minded front-end craft, and thoughtful collaboration."
+    />
+    <meta
+      name="keywords"
+      content="Marko Bare, web developer, React, JavaScript, WordPress, portfolio, front-end, accessibility, Croatia"
+    />
+    <meta name="author" content="Marko Bare" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#050005" />
+    <meta name="color-scheme" content="dark" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Marko Bare — Web Developer" />
+    <meta
+      property="og:description"
+      content="Portfolio of Marko Bare: modern websites, React, WordPress, and interfaces built with accessibility and performance in mind."
+    />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Marko Bare — Web Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfolio of Marko Bare: modern websites, React, WordPress, and accessible front-end craft."
+    />
+
+    <title>Marko Bare — Web Developer | Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;600&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@500;600;700;800&display=swap"
+      />
+    </noscript>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Marko Bare — Portfolio",
+        "description": "Web developer portfolio showcasing services, about, projects on GitHub, and contact.",
+        "inLanguage": "en"
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Static form for Netlify build-time detection (SPA) -->
+    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <input type="text" name="firstName" />
+      <input type="text" name="lastName" />
+      <input type="email" name="email" />
+      <input type="tel" name="phone" />
+      <input type="text" name="subject" />
+      <textarea name="message"></textarea>
+    </form>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

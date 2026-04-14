@@ -66,7 +66,7 @@ export default function About() {
               <p>
                Outside of work, I play chess, stay active with fitness, and explore new tools including AI-assisted workflows with 
                Cursor and Claude, which keeps me thinking strategically and adapting quickly. 
-               I am currently employed full time, and I still enjoy meeting other builders, exchanging ideas, and staying curious 
+               I am currently employed full time, and I still enjoy meeting other developers, exchanging ideas, and staying curious 
                about what is next on the web.
               </p>
             </div>

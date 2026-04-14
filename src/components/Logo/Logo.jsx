@@ -89,7 +89,7 @@ export default function Logo({ as = 'div', className = '' }) {
         </span>
       </span>
       <span className="logo-bracket" aria-hidden="true">
-        /&gt;
+      /&gt;
       </span>
     </Tag>
   )

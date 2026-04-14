@@ -1,7 +1,7 @@
 /** Update these URLs before going live. */
 export const socialLinks = {
-  linkedin: 'https://www.linkedin.com/in/your-profile',
-  github: 'https://github.com/your-username',
+  linkedin: 'https://www.linkedin.com/in/marko-bare-332255308/',
+  github: 'https://github.com/MARKO2807',
 }
 
 /** Add a direct link to your CV PDF when ready (e.g. hosted on GitHub or Drive). */
@@ -46,25 +46,6 @@ export const heroStats = [
   { value: '100%', label: 'Curiosity' },
 ]
 
-/** Glass bento cards under About copy — how you like to work. */
-export const aboutFocusCards = [
-  {
-    key: 'a11y',
-    title: 'Accessibility-first',
-    blurb: 'Semantic structure, keyboard paths, and contrast so interfaces work for everyone.',
-  },
-  {
-    key: 'craft',
-    title: 'Craft in the details',
-    blurb: 'Micro-interactions, spacing, and performance tuning that people feel more than they name.',
-  },
-  {
-    key: 'ship',
-    title: 'Iterate and ship',
-    blurb: 'Small releases, tight feedback loops, and pragmatic tools over chasing every new trend.',
-  },
-]
-
 /** Row 1 in Services — HTML, CSS, JavaScript. */
 export const skills = [
   {
@@ -99,12 +80,12 @@ export const extraTools = [
   {
     key: 'claude',
     title: 'Claude',
-    description: 'Cursor, Claude, and smart tooling to ship faster.',
+    description: 'Claude for refactors, explanations, and tight, code-aware drafts.',
   },
   {
     key: 'cursor',
     title: 'Cursor',
-    description: 'Cursor, Claude, and smart tooling to ship faster.',
+    description: 'Cursor for inline AI, multi-file context, and fast iteration.',
   },
 ]
 

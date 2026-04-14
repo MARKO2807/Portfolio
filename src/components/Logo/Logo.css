@@ -30,9 +30,9 @@
 }
 
 .logo-core {
-  --logo-caret-w: max(4px, 0.14em);
+  --logo-caret-w: max(2px, 0.12em);
   /* Full mono width + slack so text never paints over the closing bracket */
-  --logo-track: calc(var(--logo-ch, 9) * 1ch + 0.32ch);
+  --logo-track: calc(var(--logo-ch, 9) * 0.91ch + 0.32ch);
   display: inline-flex;
   align-items: center;
   box-sizing: border-box;

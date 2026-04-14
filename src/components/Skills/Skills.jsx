@@ -1,7 +1,7 @@
 import { SiAnthropic, SiCss, SiHtml5, SiJavascript, SiReact, SiWordpress } from 'react-icons/si'
-import { RiCursorLine } from 'react-icons/ri'
 import SectionTitle from '../SectionTitle/SectionTitle.jsx'
 import SkillCard from '../SkillCard/SkillCard.jsx'
+import CursorBrandIcon from '../icons/CursorBrandIcon.jsx'
 import { extraTools, skills } from '../../data/siteConfig.js'
 import './Skills.css'
 
@@ -15,7 +15,7 @@ const stackIcons = {
   react: SiReact,
   wp: SiWordpress,
   claude: SiAnthropic,
-  cursor: RiCursorLine,
+  cursor: CursorBrandIcon,
 }
 
 export default function Skills() {
@@ -25,7 +25,7 @@ export default function Skills() {
         <SectionTitle
           eyebrow="What I do"
           title="Skillset"
-          subtitle="Foundation stack in one row, then the tools and frameworks I reach for every day."
+          subtitle="My core technology stack, followed by the tools and frameworks I use every day."
           titleId="services-title"
         />
 

@@ -1,9 +1,9 @@
 import { useEffect, useRef } from 'react'
 import './Cursor.css'
 
-const MAX_TRAIL_MS = 520
-const MIN_DIST = 2.2
-const MAX_TRAIL_POINTS = 90
+const MAX_TRAIL_MS = 250
+const MIN_DIST = 2
+const MAX_TRAIL_POINTS = 15
 const DPR_CAP = 2
 
 /**
@@ -27,21 +27,21 @@ function drawNeonTrail(ctx, points) {
   ctx.shadowOffsetY = 0
 
   ctx.shadowBlur = 26
-  ctx.shadowColor = 'rgba(255, 0, 120, 0.82)'
-  ctx.strokeStyle = 'rgba(255, 55, 165, 0.48)'
+  ctx.shadowColor = 'rgba(0, 220, 255, 0.82)'
+  ctx.strokeStyle = 'rgba(0, 195, 240, 0.5)'
   ctx.lineWidth = 20
   ctx.globalAlpha = 1
   ctx.stroke()
 
   ctx.shadowBlur = 15
-  ctx.shadowColor = 'rgba(255, 110, 195, 0.65)'
-  ctx.strokeStyle = 'rgba(255, 105, 195, 0.55)'
+  ctx.shadowColor = 'rgba(80, 230, 255, 0.68)'
+  ctx.strokeStyle = 'rgba(60, 220, 255, 0.58)'
   ctx.lineWidth = 10
   ctx.stroke()
 
   ctx.shadowBlur = 7
-  ctx.shadowColor = 'rgba(255, 255, 255, 0.45)'
-  ctx.strokeStyle = 'rgba(255, 225, 248, 0.88)'
+  ctx.shadowColor = 'rgba(200, 255, 255, 0.5)'
+  ctx.strokeStyle = 'rgba(210, 252, 255, 0.9)'
   ctx.lineWidth = 4.5
   ctx.stroke()
 

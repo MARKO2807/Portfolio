@@ -18,15 +18,21 @@
   position: fixed;
   left: 0;
   top: 0;
-  width: 6px;
-  height: 6px;
+  width: 10px;
+  height: 10px;
   margin: 0;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #ffd0f0 45%, var(--neon-bright) 78%, var(--neon) 100%);
+  background: radial-gradient(
+    circle at 35% 35%,
+    #ffffff 0%,
+    #b8f8ff 38%,
+    #22d3ee 72%,
+    #0891b2 100%
+  );
   box-shadow:
     0 0 10px 2px rgba(255, 255, 255, 0.95),
-    0 0 22px 6px rgba(255, 60, 150, 0.75),
-    0 0 42px 14px rgba(255, 0, 95, 0.45);
+    0 0 22px 6px rgba(0, 220, 255, 0.78),
+    0 0 42px 14px rgba(0, 170, 210, 0.48);
   will-change: transform;
 }
 

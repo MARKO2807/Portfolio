@@ -73,7 +73,6 @@ export default function Hero() {
           <div className="hero-halo" aria-hidden="true">
             <span className="hero-halo-ring hero-halo-ring--outer" />
             <span className="hero-halo-ring hero-halo-ring--inner" />
-            <span className="hero-halo-scan" />
           </div>
           <div className="hero-center-inner">
             <div className="hero-nameblock" aria-labelledby="hero-line1">
@@ -87,6 +86,7 @@ export default function Hero() {
               <span className="hero-tagline-text">{heroRoleLine}</span>
               <span className="hero-tagline-bracket hero-tagline-bracket--right" aria-hidden="true" />
             </p>
+            <span className="hero-halo-scan" aria-hidden="true" />
           </div>
         </div>
 

@@ -21,9 +21,15 @@
 .logo-bracket--close {
   display: inline-flex;
   align-items: center;
-  gap: 0.1em;
+  gap: 0.14em;
   margin-left: 0.03em;
   letter-spacing: normal;
+}
+
+@media (max-width: 599px) {
+  .logo-bracket--close {
+    gap: 0.22em;
+  }
 }
 
 .logo-bracket--close .logo-bracket-char {

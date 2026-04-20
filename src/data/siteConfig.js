@@ -41,8 +41,8 @@ export const navItems = [
 
 /** Hero stat strip — edit numbers to match your story. */
 export const heroStats = [
-  { value: '2+', label: 'Years learning' },
-  { value: '10+', label: 'Projects' },
+  { value: '3+', label: 'Years learning' },
+  { value: '15+', label: 'Projects' },
   { value: '100%', label: 'Curiosity' },
 ]
 

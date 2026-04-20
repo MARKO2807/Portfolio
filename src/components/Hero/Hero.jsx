@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
 import { FiChevronDown } from 'react-icons/fi'
 import Logo from '../Logo/Logo.jsx'
@@ -18,7 +19,62 @@ const social = [
   { key: 'github', href: socialLinks.github, label: 'GitHub', Icon: FaGithub },
 ]
 
+const HERO_EXTRA_SCROLL_PX = 10
+
 export default function Hero() {
+  const [showHeroExtra, setShowHeroExtra] = useState(false)
+  const [heroExtraInnerVisible, setHeroExtraInnerVisible] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return undefined
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setShowHeroExtra(true)
+      return undefined
+    }
+
+    const reveal = () => {
+      if (window.scrollY > HERO_EXTRA_SCROLL_PX) {
+        setShowHeroExtra(true)
+        return true
+      }
+      return false
+    }
+
+    if (reveal()) return undefined
+
+    const onScroll = () => {
+      if (reveal()) {
+        window.removeEventListener('scroll', onScroll)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    if (!showHeroExtra) {
+      setHeroExtraInnerVisible(false)
+      return undefined
+    }
+
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setHeroExtraInnerVisible(true)
+      return undefined
+    }
+
+    let innerRaf = 0
+    const outerRaf = requestAnimationFrame(() => {
+      innerRaf = requestAnimationFrame(() => setHeroExtraInnerVisible(true))
+    })
+
+    return () => {
+      cancelAnimationFrame(outerRaf)
+      if (innerRaf) cancelAnimationFrame(innerRaf)
+    }
+  }, [showHeroExtra])
+
   const openCv = () => {
     if (cvUrl && /^https?:\/\//i.test(cvUrl)) {
       window.open(cvUrl, '_blank', 'noopener,noreferrer')
@@ -96,31 +152,33 @@ export default function Hero() {
         </button>
       </div>
 
-      <div className="hero-extra">
-        <div className="hero-extra-inner">
-          <div className="hero-extra-actions">
-            <button type="button" className="hero-chip hero-chip--fill" onClick={() => scrollToSection('contact')}>
-              Contact Me
-            </button>
-            <button type="button" className="hero-chip hero-chip--ghost" onClick={openCv}>
-              Download CV
-            </button>
+      {showHeroExtra ? (
+        <div className="hero-extra">
+          <div className={`hero-extra-inner${heroExtraInnerVisible ? ' hero-extra-inner--visible' : ''}`}>
+            <div className="hero-extra-actions">
+              <button type="button" className="hero-chip hero-chip--fill" onClick={() => scrollToSection('contact')}>
+                Contact Me
+              </button>
+              <button type="button" className="hero-chip hero-chip--ghost" onClick={openCv}>
+                Download CV
+              </button>
+            </div>
+            <ul className="hero-stats" aria-label="Highlights">
+              {heroStats.map((s) => (
+                <li key={s.label} className="hero-stat">
+                  <span className="hero-stat-value">{s.value}</span>
+                  <span className="hero-stat-label">{s.label}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="hero-lede">
+              I develop modern websites and bring creative ideas to life online. The essence of web development is
+              creating responsive, accessible, and visually captivating web applications. I focus on writing clean,
+              efficient code and utilizing modern technologies to deliver flawless user experiences.
+            </p>
           </div>
-          <ul className="hero-stats" aria-label="Highlights">
-            {heroStats.map((s) => (
-              <li key={s.label} className="hero-stat">
-                <span className="hero-stat-value">{s.value}</span>
-                <span className="hero-stat-label">{s.label}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="hero-lede">
-            I develop modern websites and bring creative ideas to life online. The essence of web development is
-            creating responsive, accessible, and visually captivating web applications. I focus on writing clean,
-            efficient code and utilizing modern technologies to deliver flawless user experiences.
-          </p>
         </div>
-      </div>
+      ) : null}
     </section>
   )
 }

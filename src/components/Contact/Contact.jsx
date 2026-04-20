@@ -14,7 +14,7 @@ export default function Contact() {
         />
         <div className="contact-layout">
           <p className="contact-intro">
-            If something here resonated with you, drop a note. I read every message and reply when I
+            If something here resonated with you, drop a message. I read every message and reply as soon as I
             can.
           </p>
           <ContactForm />

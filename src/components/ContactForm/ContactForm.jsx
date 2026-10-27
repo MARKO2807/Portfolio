@@ -182,7 +182,10 @@ export default function ContactForm() {
                   ?
                 </span>{' '}
                 {f[field.name]}{' '}
-                <span className="term-hint">({field.required ? f.required : f.optional})</span>
+                <span className="term-hint">
+                  ({field.required ? f.required : f.optional}
+                  {isTextarea ? <span className="term-hint-keys">, {f.messageHint}</span> : null})
+                </span>
                 <span className="term-colon" aria-hidden="true">
                   :
                 </span>
@@ -197,7 +200,6 @@ export default function ContactForm() {
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 disabled={submitting}
               />
-              {isTextarea ? <span className="term-hint term-hint--block">{f.messageHint}</span> : null}
             </label>
           )
         })}

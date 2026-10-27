@@ -195,8 +195,11 @@
   font-size: 0.8em;
 }
 
-.term-hint--block {
-  flex-basis: 100%;
+/* Keyboard shortcut is irrelevant on touch screens */
+@media (pointer: coarse) {
+  .term-hint-keys {
+    display: none;
+  }
 }
 
 .term-input {
@@ -225,7 +228,7 @@
 
 textarea.term-input {
   flex-basis: 100%;
-  min-height: 4.8em;
+  min-height: 3.2em;
   resize: none;
   field-sizing: content;
   max-height: 16rem;

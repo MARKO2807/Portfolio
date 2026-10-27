@@ -37,42 +37,45 @@ export default function Header({ pastHero }) {
   }
 
   return (
-    <header className={`site-header ${pastHero ? 'site-header--docked' : 'site-header--ghost'}`}>
-      <div className="site-header-inner">
-        <button type="button" className="site-header-logo-btn" onClick={() => go('home')} aria-label={t.header.goHome}>
-          <Logo />
-        </button>
-
-        <nav className="site-header-nav" aria-label={t.header.primary}>
-          <ul className="site-header-list">
-            {navIds.map((id) => (
-              <li key={id}>
-                <button type="button" className="site-header-link" onClick={() => scrollToSection(id)}>
-                  {t.nav[id]}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="site-header-actions">
-          <LanguageToggle />
-          <button type="button" className="site-header-hire" onClick={() => go('contact')}>
-            {t.header.contactMe}
+    <>
+      <header className={`site-header ${pastHero ? 'site-header--docked' : 'site-header--ghost'}`}>
+        <div className="site-header-inner">
+          <button type="button" className="site-header-logo-btn" onClick={() => go('home')} aria-label={t.header.goHome}>
+            <Logo />
           </button>
-          <button
-            type="button"
-            className="site-header-toggle"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-expanded={menuOpen}
-            aria-controls="site-mobile-nav"
-            aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
-          >
-            {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
-          </button>
+  
+          <nav className="site-header-nav" aria-label={t.header.primary}>
+            <ul className="site-header-list">
+              {navIds.map((id) => (
+                <li key={id}>
+                  <button type="button" className="site-header-link" onClick={() => scrollToSection(id)}>
+                    {t.nav[id]}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+  
+          <div className="site-header-actions">
+            <LanguageToggle />
+            <button type="button" className="site-header-hire" onClick={() => go('contact')}>
+              {t.header.contactMe}
+            </button>
+            <button
+              type="button"
+              className="site-header-toggle"
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-expanded={menuOpen}
+              aria-controls="site-mobile-nav"
+              aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
+            >
+              {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
+      {/* Sibling of <header>: its backdrop-filter would otherwise trap this fixed panel inside the header box */}
       <div
         id="site-mobile-nav"
         className={`site-header-mobile ${menuOpen ? 'site-header-mobile--open' : ''}`}
@@ -89,6 +92,6 @@ export default function Header({ pastHero }) {
           ))}
         </ul>
       </div>
-    </header>
+    </>
   )
 }

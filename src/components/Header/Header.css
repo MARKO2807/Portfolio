@@ -44,7 +44,7 @@
   }
 
   .site-header--ghost .site-header-inner,
-  .site-header--ghost .site-header-mobile {
+  .site-header-mobile {
     display: none;
   }
 }

@@ -16,7 +16,16 @@
     <meta name="author" content="Marko Bare" />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#050005" />
-    <meta name="color-scheme" content="dark" />
+    <meta name="color-scheme" content="dark light" />
+    <script>
+      // Apply the saved theme before first paint (dark is the default)
+      try {
+        if (localStorage.getItem('theme') === 'light') {
+          document.documentElement.dataset.theme = 'light'
+          document.querySelector('meta[name="theme-color"]').content = '#fbf6f9'
+        }
+      } catch (e) {}
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Marko Bare — Web Developer" />

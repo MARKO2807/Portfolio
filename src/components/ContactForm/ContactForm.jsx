@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import './ContactForm.css'
 
-const PROMPT = 'PS C:\\Users\\guest>'
+const PROMPT = 'C:\\Users\\guest>'
 
 /** Field order doubles as the Enter-to-advance order. Names must match the static Netlify form in index.html. */
 const FIELDS = [
@@ -20,7 +20,7 @@ function TerminalWindow({ title, controls, children, onBodyClick }) {
       <div className="term-titlebar">
         <div className="term-tab">
           <span className="term-tab-icon" aria-hidden="true">
-            &gt;_
+            {'C:\\'}
           </span>
           <span className="term-tab-title">{title}</span>
           <span className="term-tab-close" aria-hidden="true">
@@ -147,12 +147,12 @@ export default function ContactForm() {
 
   return (
     <TerminalWindow title={f.windowTitle} controls={f.windowControls} onBodyClick={handleBodyClick}>
-      <p className="term-line term-muted">Windows PowerShell</p>
-      <p className="term-line term-muted term-gap">Copyright (C) Marko Bare.</p>
+      <p className="term-line">Microsoft Windows [Version 10.0.26100.4061]</p>
+      <p className="term-line term-gap">(c) Marko Bare. All rights reserved.</p>
       <PromptLine>
         <span className="term-cmd">{f.command}</span>
       </PromptLine>
-      <p className="term-line term-comment term-gap"># {f.banner}</p>
+      <p className="term-line term-comment term-gap">REM {f.banner}</p>
 
       <form
         ref={formRef}

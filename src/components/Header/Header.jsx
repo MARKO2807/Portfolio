@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { FiMenu, FiX } from 'react-icons/fi'
 import Logo from '../Logo/Logo.jsx'
 import LanguageToggle from '../LanguageToggle/LanguageToggle.jsx'
+import ThemeToggle from '../ThemeToggle/ThemeToggle.jsx'
 import { navIds } from '../../data/siteConfig.js'
 import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import { scrollToSection } from '../../utils/scrollToSection.js'
@@ -57,6 +58,7 @@ export default function Header({ pastHero }) {
           </nav>
   
           <div className="site-header-actions">
+            <ThemeToggle />
             <LanguageToggle />
             <button type="button" className="site-header-hire" onClick={() => go('contact')}>
               {t.header.contactMe}

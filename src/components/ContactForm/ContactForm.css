@@ -1,11 +1,9 @@
-/* Windows Terminal look — "Campbell" colour scheme with the site's neon as accent */
+/* Windows Terminal running Command Prompt — classic grey-on-black, the site's neon as accent */
 .term {
   --term-bg: #0c0c0c;
   --term-chrome: #1f1f1f;
   --term-fg: #cccccc;
   --term-muted: #8a8a8a;
-  --term-yellow: #f9f1a5;
-  --term-cyan: #61d6d6;
   --term-green: #16c60c;
   --term-red: #e74856;
 
@@ -51,11 +49,12 @@
   place-items: center;
   width: 1.15rem;
   height: 1.15rem;
-  border-radius: 3px;
-  background: #012456;
+  border: 1px solid #5a5a5a;
+  border-radius: 2px;
+  background: #000;
   color: #fff;
   font-family: var(--font-mono);
-  font-size: 0.55rem;
+  font-size: 0.5rem;
   font-weight: 600;
 }
 
@@ -128,7 +127,7 @@
 }
 
 .term-cmd {
-  color: var(--term-yellow);
+  color: #f2f2f2;
 }
 
 .term-muted {
@@ -136,7 +135,7 @@
 }
 
 .term-comment {
-  color: #13a10e;
+  color: var(--term-muted);
 }
 
 .term-ok {
@@ -182,7 +181,7 @@
 
 .term-label {
   flex-shrink: 0;
-  color: var(--term-cyan);
+  color: var(--term-fg);
 }
 
 .term-q {

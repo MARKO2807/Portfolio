@@ -24,7 +24,7 @@
 }
 
 .lang-toggle-btn:hover {
-  color: var(--neon-bright);
+  color: var(--accent-text);
 }
 
 .lang-toggle-btn--active,

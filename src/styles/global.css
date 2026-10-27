@@ -11,6 +11,8 @@
   --neon-bright: #ff3d87;
   --neon-dim: #ffb8d4;
   --glow: rgba(255, 0, 95, 0.55);
+  /* Pink used as text; darker in light mode to keep AA contrast */
+  --accent-text: var(--neon-bright);
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 18px;
@@ -19,6 +21,21 @@
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
   --header-h: 4rem;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: dark;
+}
+
+:root[data-theme='light'] {
+  --void: #fbf6f9;
+  --surface: #f4ecf1;
+  --surface-2: #ffffff;
+  --border: rgba(70, 0, 35, 0.1);
+  --text: #16070f;
+  --text-soft: #2b1621;
+  --text-muted: #574650;
+  --text-dim: #6c5c65;
+  --glow: rgba(255, 0, 95, 0.3);
+  --accent-text: #c4004a;
+  color-scheme: light;
 }
 
 *,

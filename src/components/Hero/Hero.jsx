@@ -3,6 +3,7 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import { FiChevronDown } from 'react-icons/fi'
 import Logo from '../Logo/Logo.jsx'
 import LanguageToggle from '../LanguageToggle/LanguageToggle.jsx'
+import ThemeToggle from '../ThemeToggle/ThemeToggle.jsx'
 import { cvUrl, dockNavIds, heroLocationHighlight, heroNameLines, socialLinks } from '../../data/siteConfig.js'
 import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import { scrollToSection } from '../../utils/scrollToSection.js'
@@ -89,7 +90,10 @@ export default function Hero() {
           <Logo />
         </button>
 
-        <LanguageToggle className="hero-lang" />
+        <div className="hero-lang">
+          <ThemeToggle />
+          <LanguageToggle />
+        </div>
 
         <nav className="hero-dock" aria-label={h.shortcuts}>
           <ul className="hero-dock-list">

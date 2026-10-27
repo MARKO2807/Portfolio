@@ -4,6 +4,7 @@ import App from './App.jsx'
 import SmoothScroll from './components/SmoothScroll/SmoothScroll.jsx'
 import { LanguageProvider } from './i18n/LanguageContext.jsx'
 import './styles/global.css'
+import './styles/theme-light.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>

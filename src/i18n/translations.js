@@ -10,6 +10,10 @@ export const translations = {
       label: 'Language',
       switchTo: 'Switch to Croatian',
     },
+    theme: {
+      toLight: 'Switch to light mode',
+      toDark: 'Switch to dark mode',
+    },
     nav: {
       home: 'Home',
       services: 'Skillset',
@@ -114,8 +118,8 @@ export const translations = {
       intro: 'If something here resonated with you, drop a message. I read every message and reply as soon as I can.',
     },
     form: {
-      windowTitle: 'contact — Marko Bare',
-      command: 'send-message --to marko',
+      windowTitle: 'Command Prompt',
+      command: 'contact.exe /to marko',
       banner: 'Fill in the fields below. Press Enter to jump to the next line.',
       honeypot: 'Don’t fill this out if you’re human:',
       required: 'required',
@@ -151,6 +155,10 @@ export const translations = {
     lang: {
       label: 'Jezik',
       switchTo: 'Prebaci na engleski',
+    },
+    theme: {
+      toLight: 'Uključi svijetli način',
+      toDark: 'Uključi tamni način',
     },
     nav: {
       home: 'Početna',
@@ -256,8 +264,8 @@ export const translations = {
       intro: 'Ako ti se nešto ovdje svidjelo, pošalji poruku. Čitam svaku poruku i odgovaram čim mogu.',
     },
     form: {
-      windowTitle: 'kontakt — Marko Bare',
-      command: 'send-message --to marko',
+      windowTitle: 'Naredbeni redak',
+      command: 'contact.exe /to marko',
       banner: 'Ispuni polja ispod. Pritisni Enter za prelazak na sljedeći redak.',
       honeypot: 'Ne ispunjavaj ovo ako si čovjek:',
       required: 'obavezno',

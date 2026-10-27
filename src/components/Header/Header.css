@@ -103,7 +103,7 @@
 }
 
 .site-header-link:hover {
-  color: var(--neon-bright);
+  color: var(--accent-text);
   text-shadow: 0 0 18px var(--glow);
 }
 
@@ -153,7 +153,7 @@
 
 .site-header-toggle:hover {
   border-color: var(--neon-bright);
-  color: var(--neon-bright);
+  color: var(--accent-text);
   box-shadow: 0 0 20px rgba(255, 0, 95, 0.25);
 }
 

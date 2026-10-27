@@ -170,16 +170,30 @@ export default function Cursor() {
         dotEl.current.style.transform = `translate3d(${dx}px, ${dy}px, 0) translate(-50%, -50%)`
       }
 
+      // Idle: trail faded and dot caught up — stop drawing until the mouse moves again
+      const restX = t.x - dotPos.current.x
+      const restY = t.y - dotPos.current.y
+      if (trail.current.length === 0 && restX * restX + restY * restY < 0.01) {
+        frame.current = 0
+        return
+      }
+
       frame.current = requestAnimationFrame(loop)
     }
 
+    const wake = () => {
+      if (!frame.current && !cancelled) frame.current = requestAnimationFrame(loop)
+    }
+
     frame.current = requestAnimationFrame(loop)
+    window.addEventListener('mousemove', wake, { passive: true })
     window.addEventListener('mousemove', onMove, { passive: true })
     window.addEventListener('resize', onResize, { passive: true })
 
     return () => {
       cancelled = true
       document.body.classList.remove('has-custom-cursor')
+      window.removeEventListener('mousemove', wake)
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('resize', onResize)
       cancelAnimationFrame(frame.current)

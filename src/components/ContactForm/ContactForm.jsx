@@ -1,14 +1,72 @@
 import { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import './ContactForm.css'
 
+const PROMPT = 'PS C:\\Users\\guest>'
+
+/** Field order doubles as the Enter-to-advance order. Names must match the static Netlify form in index.html. */
+const FIELDS = [
+  { name: 'firstName', type: 'text', required: true, autoComplete: 'given-name' },
+  { name: 'lastName', type: 'text', required: true, autoComplete: 'family-name' },
+  { name: 'email', type: 'email', required: true, autoComplete: 'email' },
+  { name: 'phone', type: 'tel', required: false, autoComplete: 'tel' },
+  { name: 'subject', type: 'text', required: false, autoComplete: 'off' },
+  { name: 'message', type: 'textarea', required: true },
+]
+
+function TerminalWindow({ title, controls, children, onBodyClick }) {
+  return (
+    <div className="term">
+      <div className="term-titlebar">
+        <div className="term-tab">
+          <span className="term-tab-icon" aria-hidden="true">
+            &gt;_
+          </span>
+          <span className="term-tab-title">{title}</span>
+          <span className="term-tab-close" aria-hidden="true">
+            ×
+          </span>
+        </div>
+        <span className="term-newtab" aria-hidden="true">
+          +
+        </span>
+        <div className="term-controls" aria-hidden="true">
+          <span className="term-control" title={controls.min}>
+            <svg viewBox="0 0 10 10"><path d="M0 5h10" /></svg>
+          </span>
+          <span className="term-control" title={controls.max}>
+            <svg viewBox="0 0 10 10"><rect x="0.5" y="0.5" width="9" height="9" /></svg>
+          </span>
+          <span className="term-control term-control--close" title={controls.close}>
+            <svg viewBox="0 0 10 10"><path d="M0 0l10 10M10 0L0 10" /></svg>
+          </span>
+        </div>
+      </div>
+      {/* Clicking empty terminal space focuses the next field, like a real shell */}
+      <div className="term-body" onClick={onBodyClick}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
+function PromptLine({ children }) {
+  return (
+    <p className="term-line">
+      <span className="term-ps">{PROMPT}</span> {children}
+    </p>
+  )
+}
+
 export default function ContactForm() {
+  const { t } = useLanguage()
+  const f = t.form
   const [status, setStatus] = useState('idle')
+  const formRef = useRef(null)
   const successRef = useRef(null)
 
   useEffect(() => {
-    if (status === 'success' && successRef.current) {
-      successRef.current.focus()
-    }
+    if (status === 'success') successRef.current?.focus()
   }, [status])
 
   async function handleSubmit(event) {
@@ -31,34 +89,74 @@ export default function ContactForm() {
     }
   }
 
+  function focusField(index) {
+    const name = FIELDS[index]?.name
+    if (name) formRef.current?.elements.namedItem(name)?.focus()
+  }
+
+  function handleKeyDown(event, index) {
+    if (event.key !== 'Enter' || event.nativeEvent.isComposing) return
+    const isTextarea = FIELDS[index].type === 'textarea'
+
+    if (isTextarea) {
+      if (event.ctrlKey || event.metaKey) {
+        event.preventDefault()
+        formRef.current?.requestSubmit()
+      }
+      return
+    }
+
+    event.preventDefault()
+    if (event.currentTarget.checkValidity()) focusField(index + 1)
+    else event.currentTarget.reportValidity()
+  }
+
+  function handleBodyClick(event) {
+    if (event.target !== event.currentTarget && !event.target.classList.contains('term-line')) return
+    const form = formRef.current
+    if (!form) return
+    const firstEmpty = FIELDS.findIndex(({ name }) => !form.elements.namedItem(name)?.value)
+    focusField(firstEmpty === -1 ? FIELDS.length - 1 : firstEmpty)
+  }
+
   if (status === 'success') {
     return (
-      <div className="contact-form-wrap">
-        <div
-          ref={successRef}
-          className="contact-form-success"
-          role="status"
-          aria-live="polite"
-          tabIndex={-1}
-        >
-          <span className="contact-form-success-glow" aria-hidden="true" />
-          <p className="contact-form-success-eyebrow">Delivered</p>
-          <h3 className="contact-form-success-title">Thanks — your message is in.</h3>
-          <p className="contact-form-success-text">
-            I read every note and will get back when I can. If your inbox is picky, check spam for a reply.
+      <TerminalWindow title={f.windowTitle} controls={f.windowControls}>
+        <PromptLine>
+          <span className="term-cmd">{f.command}</span>
+        </PromptLine>
+        {f.successLines.map((line) => (
+          <p key={line} className="term-line term-muted">
+            {line}
           </p>
-          <button type="button" className="contact-form-success-cta" onClick={() => setStatus('idle')}>
-            Send another message
-          </button>
+        ))}
+        <div ref={successRef} className="term-success" role="status" aria-live="polite" tabIndex={-1}>
+          <p className="term-line term-ok">✔ {f.successTitle}</p>
+          <p className="term-line term-muted">{f.successText}</p>
         </div>
-      </div>
+        <PromptLine>
+          <button type="button" className="term-btn" onClick={() => setStatus('idle')}>
+            {f.again}
+          </button>
+        </PromptLine>
+      </TerminalWindow>
     )
   }
 
+  const submitting = status === 'submitting'
+
   return (
-    <div className="contact-form-wrap">
+    <TerminalWindow title={f.windowTitle} controls={f.windowControls} onBodyClick={handleBodyClick}>
+      <p className="term-line term-muted">Windows PowerShell</p>
+      <p className="term-line term-muted term-gap">Copyright (C) Marko Bare.</p>
+      <PromptLine>
+        <span className="term-cmd">{f.command}</span>
+      </PromptLine>
+      <p className="term-line term-comment term-gap"># {f.banner}</p>
+
       <form
-        className="contact-form"
+        ref={formRef}
+        className="term-form"
         name="contact"
         method="POST"
         action="/"
@@ -67,51 +165,56 @@ export default function ContactForm() {
         onSubmit={handleSubmit}
       >
         <input type="hidden" name="form-name" value="contact" />
-        <p className="contact-form-honey">
+        <p className="term-honey">
           <label>
-            Don&apos;t fill this out if you&apos;re human:
+            {f.honeypot}
             <input name="bot-field" tabIndex={-1} autoComplete="off" />
           </label>
         </p>
+
+        {FIELDS.map((field, index) => {
+          const isTextarea = field.type === 'textarea'
+          const Control = isTextarea ? 'textarea' : 'input'
+          return (
+            <label key={field.name} className={`term-field${isTextarea ? ' term-field--multi' : ''}`}>
+              <span className="term-label">
+                <span className="term-q" aria-hidden="true">
+                  ?
+                </span>{' '}
+                {f[field.name]}{' '}
+                <span className="term-hint">({field.required ? f.required : f.optional})</span>
+                <span className="term-colon" aria-hidden="true">
+                  :
+                </span>
+              </span>
+              <Control
+                className="term-input"
+                name={field.name}
+                required={field.required}
+                autoComplete={field.autoComplete}
+                spellCheck={isTextarea}
+                {...(isTextarea ? { rows: 3 } : { type: field.type })}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                disabled={submitting}
+              />
+              {isTextarea ? <span className="term-hint term-hint--block">{f.messageHint}</span> : null}
+            </label>
+          )
+        })}
+
         {status === 'error' ? (
-          <p className="contact-form-error" role="alert">
-            Something went wrong. Please try again in a moment, or email me directly.
+          <p className="term-line term-err" role="alert">
+            {f.error}
           </p>
         ) : null}
-        <div className="contact-form-row">
-          <label className="contact-form-field">
-            <span className="contact-form-label">First name</span>
-            <input className="contact-form-input" type="text" name="firstName" required autoComplete="given-name" />
-          </label>
-          <label className="contact-form-field">
-            <span className="contact-form-label">Last name</span>
-            <input className="contact-form-input" type="text" name="lastName" required autoComplete="family-name" />
-          </label>
-        </div>
-        <div className="contact-form-row">
-          <label className="contact-form-field">
-            <span className="contact-form-label">Email</span>
-            <input className="contact-form-input" type="email" name="email" required autoComplete="email" />
-          </label>
-          <label className="contact-form-field">
-            <span className="contact-form-label">Phone</span>
-            <input className="contact-form-input" type="tel" name="phone" autoComplete="tel" />
-          </label>
-        </div>
-        <label className="contact-form-field">
-          <span className="contact-form-label">Subject</span>
-          <input className="contact-form-input" type="text" name="subject" autoComplete="off" />
-        </label>
-        <label className="contact-form-field">
-          <span className="contact-form-label">Message</span>
-          <textarea className="contact-form-textarea" name="message" rows={5} required />
-        </label>
-        <div className="contact-form-actions">
-          <button className="contact-form-submit" type="submit" disabled={status === 'submitting'}>
-            {status === 'submitting' ? 'Sending…' : 'Send'}
+
+        <PromptLine>
+          <button className="term-btn term-btn--primary" type="submit" disabled={submitting}>
+            {submitting ? f.submitting : `${f.submit} ⏎`}
           </button>
-        </div>
+          {submitting ? <span className="term-spinner" aria-hidden="true" /> : null}
+        </PromptLine>
       </form>
-    </div>
+    </TerminalWindow>
   )
 }

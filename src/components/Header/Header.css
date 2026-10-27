@@ -266,3 +266,10 @@ body.site-nav-open {
     grid-column: 3;
   }
 }
+
+/* Narrow phones: "Contact" lives in the menu, keep room for the language toggle */
+@media (max-width: 479px) {
+  .site-header-hire {
+    display: none;
+  }
+}

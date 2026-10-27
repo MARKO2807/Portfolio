@@ -92,6 +92,9 @@
 }
 
 .hero-nameblock {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
   position: relative;
   z-index: 2;
   text-align: center;
@@ -99,6 +102,7 @@
 }
 
 .hero-name-line {
+  display: block;
   margin: 0;
   font-family: var(--font-display);
   font-weight: 800;
@@ -639,6 +643,10 @@
   }
 }
 
+.hero-lang {
+  display: none;
+}
+
 @media (min-width: 900px) {
   .hero-cinematic {
     padding: 1.25rem 2.5rem 3rem;
@@ -650,6 +658,14 @@
     display: flex;
     top: 1.5rem;
     left: 2rem;
+  }
+
+  .hero-lang {
+    display: inline-flex;
+    position: absolute;
+    top: 1.35rem;
+    right: 2rem;
+    z-index: 6;
   }
 
   .hero-dock {

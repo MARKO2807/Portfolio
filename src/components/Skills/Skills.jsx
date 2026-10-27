@@ -3,6 +3,7 @@ import SectionTitle from '../SectionTitle/SectionTitle.jsx'
 import SkillCard from '../SkillCard/SkillCard.jsx'
 import CursorBrandIcon from '../icons/CursorBrandIcon.jsx'
 import { extraTools, skills } from '../../data/siteConfig.js'
+import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import './Skills.css'
 
 const coreIcons = {
@@ -19,29 +20,27 @@ const stackIcons = {
 }
 
 export default function Skills() {
+  const { t } = useLanguage()
+  const s = t.skills
+
   return (
     <section className="skills page-section" aria-labelledby="services-title" id="services">
       <div className="skills-inner">
-        <SectionTitle
-          eyebrow="What I do"
-          title="Skillset"
-          subtitle="My core technology stack, followed by the tools and frameworks I use every day."
-          titleId="services-title"
-        />
+        <SectionTitle eyebrow={s.eyebrow} title={s.title} subtitle={s.subtitle} titleId="services-title" />
 
         <div className="skills-rows">
           <div className="skills-row">
             <div className="skills-row-track skills-row-track--3">
-              {skills.map((s) => (
-                <SkillCard key={s.key} icon={coreIcons[s.key]} title={s.title} description={s.description} />
+              {skills.map((item) => (
+                <SkillCard key={item.key} icon={coreIcons[item.key]} title={item.title} description={s.items[item.key]} />
               ))}
             </div>
           </div>
 
           <div className="skills-row">
             <div className="skills-row-track skills-row-track--4">
-              {extraTools.map((s) => (
-                <SkillCard key={s.key} icon={stackIcons[s.key]} title={s.title} description={s.description} />
+              {extraTools.map((item) => (
+                <SkillCard key={item.key} icon={stackIcons[item.key]} title={item.title} description={s.items[item.key]} />
               ))}
             </div>
           </div>

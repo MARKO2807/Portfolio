@@ -1,24 +1,18 @@
 import SectionTitle from '../SectionTitle/SectionTitle.jsx'
 import ContactForm from '../ContactForm/ContactForm.jsx'
+import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import './Contact.css'
 
 export default function Contact() {
+  const { t } = useLanguage()
+  const c = t.contact
+
   return (
     <section id="contact" className="contact page-section" aria-labelledby="contact-title">
       <div className="contact-inner">
-        <SectionTitle
-          eyebrow="Let’s talk"
-          title="Contact me"
-          subtitle="I’m in a full-time role, but I’m always happy to hear from you — questions, ideas, or a quick hello."
-          titleId="contact-title"
-        />
-        <div className="contact-layout">
-          <p className="contact-intro">
-            If something here resonated with you, drop a message. I read every message and reply as soon as I
-            can.
-          </p>
-          <ContactForm />
-        </div>
+        <SectionTitle eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} titleId="contact-title" />
+        <p className="contact-intro">{c.intro}</p>
+        <ContactForm />
       </div>
     </section>
   )

@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { FiMenu, FiX } from 'react-icons/fi'
 import Logo from '../Logo/Logo.jsx'
-import { navItems } from '../../data/siteConfig.js'
+import LanguageToggle from '../LanguageToggle/LanguageToggle.jsx'
+import { navIds } from '../../data/siteConfig.js'
+import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import { scrollToSection } from '../../utils/scrollToSection.js'
 import './Header.css'
 
 export default function Header({ pastHero }) {
+  const { t } = useLanguage()
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
@@ -17,6 +20,15 @@ export default function Header({ pastHero }) {
     if (pastHero) setMenuOpen(false)
   }, [pastHero])
 
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const onKey = (e) => {
+      if (e.key === 'Escape') setMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [menuOpen])
+
   const closeMenu = () => setMenuOpen(false)
 
   const go = (id) => {
@@ -24,24 +36,19 @@ export default function Header({ pastHero }) {
     closeMenu()
   }
 
-  const hire = () => {
-    scrollToSection('contact')
-    closeMenu()
-  }
-
   return (
     <header className={`site-header ${pastHero ? 'site-header--docked' : 'site-header--ghost'}`}>
       <div className="site-header-inner">
-        <button type="button" className="site-header-logo-btn" onClick={() => go('home')} aria-label="Go to home">
+        <button type="button" className="site-header-logo-btn" onClick={() => go('home')} aria-label={t.header.goHome}>
           <Logo />
         </button>
 
-        <nav className="site-header-nav" aria-label="Primary">
+        <nav className="site-header-nav" aria-label={t.header.primary}>
           <ul className="site-header-list">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <button type="button" className="site-header-link" onClick={() => scrollToSection(item.id)}>
-                  {item.label}
+            {navIds.map((id) => (
+              <li key={id}>
+                <button type="button" className="site-header-link" onClick={() => scrollToSection(id)}>
+                  {t.nav[id]}
                 </button>
               </li>
             ))}
@@ -49,8 +56,9 @@ export default function Header({ pastHero }) {
         </nav>
 
         <div className="site-header-actions">
-          <button type="button" className="site-header-hire" onClick={hire}>
-            Contact Me
+          <LanguageToggle />
+          <button type="button" className="site-header-hire" onClick={() => go('contact')}>
+            {t.header.contactMe}
           </button>
           <button
             type="button"
@@ -58,7 +66,7 @@ export default function Header({ pastHero }) {
             onClick={() => setMenuOpen((v) => !v)}
             aria-expanded={menuOpen}
             aria-controls="site-mobile-nav"
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-label={menuOpen ? t.header.closeMenu : t.header.openMenu}
           >
             {menuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
           </button>
@@ -69,12 +77,13 @@ export default function Header({ pastHero }) {
         id="site-mobile-nav"
         className={`site-header-mobile ${menuOpen ? 'site-header-mobile--open' : ''}`}
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
       >
         <ul className="site-header-mobile-list">
-          {navItems.map((item) => (
-            <li key={item.id}>
-              <button type="button" className="site-header-mobile-link" onClick={() => go(item.id)}>
-                {item.label}
+          {navIds.map((id) => (
+            <li key={id}>
+              <button type="button" className="site-header-mobile-link" onClick={() => go(id)}>
+                {t.nav[id]}
               </button>
             </li>
           ))}

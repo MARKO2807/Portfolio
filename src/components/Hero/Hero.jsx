@@ -1,16 +1,10 @@
 import { useEffect, useState } from 'react'
-import { FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa'
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa'
 import { FiChevronDown } from 'react-icons/fi'
 import Logo from '../Logo/Logo.jsx'
-import {
-  cvUrl,
-  dockNavItems,
-  heroLocation,
-  heroNameLines,
-  heroRoleLine,
-  heroStats,
-  socialLinks,
-} from '../../data/siteConfig.js'
+import LanguageToggle from '../LanguageToggle/LanguageToggle.jsx'
+import { cvUrl, dockNavIds, heroLocationHighlight, heroNameLines, socialLinks } from '../../data/siteConfig.js'
+import { useLanguage } from '../../i18n/LanguageContext.jsx'
 import { scrollToSection } from '../../utils/scrollToSection.js'
 import './Hero.css'
 
@@ -22,12 +16,12 @@ const social = [
 const HERO_EXTRA_SCROLL_PX = 10
 
 export default function Hero() {
+  const { t } = useLanguage()
+  const h = t.hero
   const [showHeroExtra, setShowHeroExtra] = useState(false)
   const [heroExtraInnerVisible, setHeroExtraInnerVisible] = useState(false)
 
   useEffect(() => {
-    if (typeof window === 'undefined') return undefined
-
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setShowHeroExtra(true)
       return undefined
@@ -59,7 +53,7 @@ export default function Hero() {
       return undefined
     }
 
-    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setHeroExtraInnerVisible(true)
       return undefined
     }
@@ -86,22 +80,23 @@ export default function Hero() {
   const [line1, line2] = heroNameLines.length >= 2 ? heroNameLines : ['MARKO', 'BARE']
 
   return (
-    <section id="home" className="hero page-section" aria-label="Introduction">
+    <section id="home" className="hero page-section" aria-label={h.intro}>
       <div className="hero-noise" aria-hidden="true" />
       <div className="hero-gridlines" aria-hidden="true" />
 
       <div className="hero-cinematic">
-        <button type="button" className="hero-brand" onClick={() => scrollToSection('home')} aria-label="Home">
-        
+        <button type="button" className="hero-brand" onClick={() => scrollToSection('home')} aria-label={h.home}>
           <Logo />
         </button>
 
-        <nav className="hero-dock" aria-label="Section shortcuts">
+        <LanguageToggle className="hero-lang" />
+
+        <nav className="hero-dock" aria-label={h.shortcuts}>
           <ul className="hero-dock-list">
-            {dockNavItems.map((item) => (
-              <li key={item.id}>
-                <button type="button" className="hero-dock-link" onClick={() => scrollToSection(item.id)}>
-                  {item.label}
+            {dockNavIds.map((id) => (
+              <li key={id}>
+                <button type="button" className="hero-dock-link" onClick={() => scrollToSection(id)}>
+                  {t.dock[id]}
                 </button>
               </li>
             ))}
@@ -110,12 +105,11 @@ export default function Hero() {
 
         <div className="hero-roleblock">
           <p className="hero-role-loc">
-            {heroLocation.prefix}{' '}
-            <span className="hero-role-loc-highlight">{heroLocation.highlight}</span>
+            {h.locationPrefix} <span className="hero-role-loc-highlight">{heroLocationHighlight}</span>
           </p>
         </div>
 
-        <ul className="hero-dock-social" aria-label="Social profiles">
+        <ul className="hero-dock-social" aria-label={h.social}>
           {social.map(({ key, href, label, Icon }) => (
             <li key={key}>
               <a className="hero-dock-social-link" href={href} target="_blank" rel="noreferrer noopener" aria-label={label}>
@@ -131,22 +125,20 @@ export default function Hero() {
             <span className="hero-halo-ring hero-halo-ring--inner" />
           </div>
           <div className="hero-center-inner">
-            <div className="hero-nameblock" aria-labelledby="hero-line1">
-              <p id="hero-line1" className="hero-name-line hero-name-line--soft">
-                {line1}
-              </p>
-              <p className="hero-name-line hero-name-line--neon">{line2}</p>
-            </div>
+            <h1 className="hero-nameblock">
+              <span className="hero-name-line hero-name-line--soft">{line1}</span>{' '}
+              <span className="hero-name-line hero-name-line--neon">{line2}</span>
+            </h1>
             <p className="hero-tagline">
               <span className="hero-tagline-bracket hero-tagline-bracket--left" aria-hidden="true" />
-              <span className="hero-tagline-text">{heroRoleLine}</span>
+              <span className="hero-tagline-text">{h.role}</span>
               <span className="hero-tagline-bracket hero-tagline-bracket--right" aria-hidden="true" />
             </p>
             <span className="hero-halo-scan" aria-hidden="true" />
           </div>
         </div>
 
-        <button type="button" className="hero-scrollhint" onClick={() => scrollToSection('services')} aria-label="Scroll to content">
+        <button type="button" className="hero-scrollhint" onClick={() => scrollToSection('services')} aria-label={h.scrollHint}>
           <span className="hero-scrollhint-line" />
           <FiChevronDown className="hero-scrollhint-icon" aria-hidden="true" />
         </button>
@@ -157,25 +149,21 @@ export default function Hero() {
           <div className={`hero-extra-inner${heroExtraInnerVisible ? ' hero-extra-inner--visible' : ''}`}>
             <div className="hero-extra-actions">
               <button type="button" className="hero-chip hero-chip--fill" onClick={() => scrollToSection('contact')}>
-                Contact Me
+                {h.contactMe}
               </button>
               <button type="button" className="hero-chip hero-chip--ghost" onClick={openCv}>
-                Download CV
+                {h.downloadCv}
               </button>
             </div>
-            <ul className="hero-stats" aria-label="Highlights">
-              {heroStats.map((s) => (
-                <li key={s.label} className="hero-stat">
+            <ul className="hero-stats" aria-label={h.highlights}>
+              {h.stats.map((s) => (
+                <li key={s.value} className="hero-stat">
                   <span className="hero-stat-value">{s.value}</span>
                   <span className="hero-stat-label">{s.label}</span>
                 </li>
               ))}
             </ul>
-            <p className="hero-lede">
-              I develop modern websites and bring creative ideas to life online. The essence of web development is
-              creating responsive, accessible, and visually captivating web applications. I focus on writing clean,
-              efficient code and utilizing modern technologies to deliver flawless user experiences.
-            </p>
+            <p className="hero-lede">{h.lede}</p>
           </div>
         </div>
       ) : null}

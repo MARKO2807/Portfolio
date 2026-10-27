@@ -2,12 +2,15 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
 import SmoothScroll from './components/SmoothScroll/SmoothScroll.jsx'
+import { LanguageProvider } from './i18n/LanguageContext.jsx'
 import './styles/global.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <SmoothScroll>
-      <App />
-    </SmoothScroll>
+    <LanguageProvider>
+      <SmoothScroll>
+        <App />
+      </SmoothScroll>
+    </LanguageProvider>
   </StrictMode>,
 )

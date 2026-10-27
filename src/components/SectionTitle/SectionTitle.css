@@ -9,7 +9,7 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--neon-bright);
   text-shadow: 0 0 18px rgba(255, 0, 95, 0.35);
 }
 

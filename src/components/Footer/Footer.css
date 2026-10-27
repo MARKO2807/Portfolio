@@ -45,7 +45,7 @@
 }
 
 .site-footer-nav-link:hover {
-  color: var(--accent-text);
+  color: var(--neon-bright);
   text-shadow: 0 0 16px rgba(255, 0, 95, 0.35);
 }
 
@@ -61,7 +61,7 @@
   display: grid;
   place-items: center;
   font-size: 1rem;
-  color: var(--accent-text);
+  color: var(--neon-bright);
   border: 1px solid rgba(255, 0, 95, 0.35);
   transition: background 0.25s ease, transform 0.3s var(--ease-out), box-shadow 0.35s ease;
 }
@@ -93,7 +93,7 @@
 }
 
 .site-footer-contact-link:hover {
-  color: var(--accent-text);
+  color: var(--neon-bright);
 }
 
 @media (min-width: 640px) {

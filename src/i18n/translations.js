@@ -10,10 +10,6 @@ export const translations = {
       label: 'Language',
       switchTo: 'Switch to Croatian',
     },
-    theme: {
-      toLight: 'Switch to light mode',
-      toDark: 'Switch to dark mode',
-    },
     nav: {
       home: 'Home',
       services: 'Skillset',
@@ -155,10 +151,6 @@ export const translations = {
     lang: {
       label: 'Jezik',
       switchTo: 'Prebaci na engleski',
-    },
-    theme: {
-      toLight: 'Uključi svijetli način',
-      toDark: 'Uključi tamni način',
     },
     nav: {
       home: 'Početna',
